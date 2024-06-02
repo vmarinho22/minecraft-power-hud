@@ -26,13 +26,6 @@
 			"com.clockmodeui.ClockModUIDataGenerator"
 		]
 	},
-	"mixins": [
-		"clock-mod-ui.mixins.json",
-		{
-			"config": "clock-mod-ui.client.mixins.json",
-			"environment": "client"
-		}
-	],
 	"depends": {
 		"fabricloader": ">=0.15.11",
 		"minecraft": "~1.20.1",
