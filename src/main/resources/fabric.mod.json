@@ -1,0 +1,45 @@
+{
+	"schemaVersion": 1,
+	"id": "clock-mod-ui",
+	"version": "${version}",
+	"name": "Clock Mod UI",
+	"description": "A simple mod that adds a clock to the game UI.",
+	"authors": [
+		"Me! Vinicius Marinho <vmarinho22>",
+		"Douglas Souza <douglassouzag>"
+	],
+	"contact": {
+		"homepage": "https://github.com/vmarinho22",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/clock-mod-ui/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.clockmodeui.ClockModUI"
+		],
+		"client": [
+			"com.clockmodeui.ClockModUIClient"
+		],
+		"fabric-datagen": [
+			"com.clockmodeui.ClockModUIDataGenerator"
+		]
+	},
+	"mixins": [
+		"clock-mod-ui.mixins.json",
+		{
+			"config": "clock-mod-ui.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.15.11",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
