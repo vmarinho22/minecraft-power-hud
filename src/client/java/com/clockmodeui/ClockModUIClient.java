@@ -1,174 +1,22 @@
 package com.clockmodeui;
 
-import java.util.Arrays;
+import com.clockmodeui.huds.ClockUI;
+import com.clockmodeui.huds.CompassUI;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
 
 public class ClockModUIClient implements ClientModInitializer {
-
-  private static final int TICKS_PER_HOUR = 1000;
-  private static final int MAGIC_NUMBER_DIVISION_CONSTANT_FOR_CLOCK = 375;
+  private final ClockUI clockUI = new ClockUI();
+  private final CompassUI compassUI = new CompassUI();
 
   @Override
   public void onInitializeClient() {
     MinecraftClient client = MinecraftClient.getInstance();
 
     HudRenderCallback.EVENT.register((context, tickDelta) -> {
-      drawClock(context, client);
-      drawCompass(context, client);
+      clockUI.drawInPlayerUI(context, client);
+      compassUI.drawInPlayerUI(context, client);
     });
-  }
-
-  private void drawClock(DrawContext context, MinecraftClient client) {
-    if (!doesPlayerHaveClock(client)) {
-      return;
-    }
-
-    if (client.world == null) {
-      return;
-    }
-
-    long time = client.world.getTimeOfDay() % 24000;
-    int textureTime = (int) (time / MAGIC_NUMBER_DIVISION_CONSTANT_FOR_CLOCK);
-    int hours = (int) ((time / TICKS_PER_HOUR + 6) % 24); // In-game time starts at 6 AM
-    int minutes = (int) ((time % TICKS_PER_HOUR) * 60 / TICKS_PER_HOUR);
-
-    String timeString = String.format("%02d:%02d", hours, minutes);
-    int width = client.getWindow().getScaledWidth();
-
-    String formatedTexturePathWithCorrectTime = String.format(
-      "textures/item/clock_%02d.png",
-      textureTime
-    );
-    int textWidth = client.textRenderer.getWidth(timeString);
-
-    Identifier texture = new Identifier(
-      "minecraft",
-      formatedTexturePathWithCorrectTime
-    );
-
-    context.drawTexture(
-      texture,
-      ((width - textWidth) / 2) - 14,
-      8,
-      0,
-      0,
-      12,
-      12,
-      12,
-      12
-    );
-
-    context.drawTextWithShadow(
-      client.textRenderer,
-      Text.literal(timeString).formatted(Formatting.YELLOW),
-      ((width - textWidth) / 2),
-      10,
-      0xFFFFFFFF
-    );
-  }
-
-  private void drawCompass(DrawContext context, MinecraftClient client) {
-    if (!doesPlayerHaveCompass(client)) {
-      return;
-    }
-
-    if (client.world == null) {
-      return;
-    }
-
-    String[] directionsArray = new String[] {
-      "S",
-      "SW",
-      "W",
-      "NW",
-      "N",
-      "NE",
-      "E",
-      "SE",
-    };
-
-    float directionDegree = getPlayerLookingDirection(client);
-    int directionIndex = (int) Math.floor((directionDegree + 22.5) / 45) % 8;
-
-    String direction = directionsArray[directionIndex];
-    String[] newDirectionsArray = rearrangeArray(directionsArray, direction);
-
-    String compassText = String.join("    |    ", newDirectionsArray);
-
-    int textWidth = client.textRenderer.getWidth(compassText);
-
-    int width = client.getWindow().getScaledWidth();
-
-    context.drawTextWithShadow(
-      client.textRenderer,
-      Text.literal(compassText).formatted(Formatting.YELLOW),
-      ((width - textWidth) / 2),
-      22,
-      0xFFFFFFFF
-    );
-  }
-
-  private boolean doesPlayerHaveClock(MinecraftClient client) {
-    // check if client has a clock item in their inventory
-    if (client.player == null) {
-      return false;
-    }
-
-    return client.player.getInventory().contains(new ItemStack(Items.CLOCK));
-  }
-
-  private boolean doesPlayerHaveCompass(MinecraftClient client) {
-    if (client.player == null) {
-      return false;
-    }
-
-    return client.player.getInventory().contains(new ItemStack(Items.COMPASS));
-  }
-
-  private float getPlayerLookingDirection(MinecraftClient client) {
-    float yaw = client.player.getYaw();
-    float direction = (yaw % 360 + 360) % 360;
-    return direction;
-  }
-
-  public static String[] rearrangeArray(
-    String[] array,
-    String selectedElement
-  ) {
-    int n = array.length;
-    int selectedIndex = -1;
-
-    for (int i = 0; i < n; i++) {
-      if (array[i].equals(selectedElement)) {
-        selectedIndex = i;
-        break;
-      }
-    }
-
-    if (selectedIndex == -1) {
-      throw new IllegalArgumentException(
-        "Selected element not found in the array."
-      );
-    }
-
-    String[] newArray = new String[n];
-    int middleIndex = n / 2;
-
-    for (int i = 0; i < n; i++) {
-      int newIndex = (middleIndex + i) % n;
-      newArray[newIndex] = array[(selectedIndex + i) % n];
-    }
-
-    String[] finalArray = Arrays.copyOfRange(newArray, 1, newArray.length);
-
-    return finalArray;
   }
 }
