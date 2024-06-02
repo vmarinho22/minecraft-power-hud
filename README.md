@@ -1,10 +1,10 @@
-# Clock Mod UI
+# Clock and Compass HUD Mod
 
-A simple minecraft mod to show game hours.
+A simple minecraft mod to show game time and direction.
 
-It works when the game player has a watch in their inventory.
+It works when the game player has a clock or a compass in their inventory.
 
-![simple-image](./readme/images/simple-clock-example.png)
+![simple-image](./readme/images/clock-and-compass-hud.png)
 
 
 ## Requirements
@@ -25,4 +25,4 @@ It works when the game player has a watch in their inventory.
 
 ## In game example
 
-![full-game-xp](./readme/images/full-game-example.png)
+![full-game-xp](./readme/images/in-game-example.png)
