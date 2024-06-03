@@ -1,3 +1,5 @@
+![simple-image](./readme/images/power-hud-logo128x128.png)
+
 # Minecraft Power HUD
 
 A simple mod that powers up the player's HUD (Clock, Compass, Coordinates, etc.)
