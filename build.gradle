@@ -22,7 +22,7 @@ loom {
     splitEnvironmentSourceSets()
 
 	mods {
-		"clock-mod-ui" {
+		"power-hud" {
 			sourceSet sourceSets.main
 			sourceSet sourceSets.client
 		}

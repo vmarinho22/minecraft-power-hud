@@ -1,12 +1,12 @@
-package com.clockmodeui;
+package com.powerhud;
 
-import com.clockmodeui.huds.ClockUI;
-import com.clockmodeui.huds.CompassUI;
+import com.powerhud.huds.ClockUI;
+import com.powerhud.huds.CompassUI;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 
-public class ClockModUIClient implements ClientModInitializer {
+public class PowerHUDClient implements ClientModInitializer {
 
   private final ClockUI clockUI = new ClockUI();
   private final CompassUI compassUI = new CompassUI();

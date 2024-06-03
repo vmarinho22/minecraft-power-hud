@@ -1,4 +1,4 @@
-package com.clockmodeui.huds;
+package com.powerhud.huds;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;

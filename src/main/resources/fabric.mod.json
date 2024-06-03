@@ -1,11 +1,11 @@
 {
 	"schemaVersion": 1,
-	"id": "clock-mod-ui",
+	"id": "power-hud",
 	"version": "${version}",
-	"name": "Clock Mod UI",
-	"description": "A simple mod that adds a clock to the game UI.",
+	"name": "Power HUD",
+	"description": "A simple mod that powers up the player's HUD (Clock, Compass, Coordinates, etc.)",
 	"authors": [
-		"Me! Vinicius Marinho <vmarinho22>",
+		"Vinicius Marinho <vmarinho22>",
 		"Douglas Souza <douglassouzag>"
 	],
 	"contact": {
@@ -13,17 +13,17 @@
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/clock-mod-ui/icon.png",
+	"icon": "assets/power-hud/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.clockmodeui.ClockModUI"
+			"com.powerhud.PowerHUD"
 		],
 		"client": [
-			"com.clockmodeui.ClockModUIClient"
+			"com.powerhud.PowerHUDClient"
 		],
 		"fabric-datagen": [
-			"com.clockmodeui.ClockModUIDataGenerator"
+			"com.powerhud.PowerHUDDataGenerator"
 		]
 	},
 	"depends": {
